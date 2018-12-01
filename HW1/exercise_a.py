@@ -20,7 +20,7 @@ for i, weight in enumerate(nodes.split()):
     weight = int(weight)/sum(adjMatrix[i])
     nodeWeight[i] = weight
 
-print(nodeWeight)
+
 answer = []
 
 while len(nodeWeight) > 0:
