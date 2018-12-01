@@ -1,13 +1,12 @@
 import sys
 
 f = open(sys.argv[1], "r")
-n = f.readline() #n node
+n = int(f.readline()) #n node
 
 nodes = f.readline()
 nodeWeight = []
 
-for i in nodes.split():
-    nodeWeight.append(i)
+
 print(nodeWeight)
 
 adjMatrix = []
@@ -18,6 +17,12 @@ for i in range(n):
         tmp.append(j)
     adjMatrix.append(tmp)
 
-print(adjMatrix)
+for i, weight in enumerate(nodes.split()):
+    weight = int(weight)/sum(adjMatrix[i])
+    nodeWeight.append((i, weight))
+
+print(nodeWeight) 
+    
+#print(adjMatrix)
 
 f.close()
