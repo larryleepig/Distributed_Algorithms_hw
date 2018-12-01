@@ -1,28 +1,39 @@
 import sys
 
+
 f = open(sys.argv[1], "r")
 n = int(f.readline()) #n node
 
 nodes = f.readline()
-nodeWeight = []
-
-
-print(nodeWeight)
+nodeWeight = {}
 
 adjMatrix = []
 for i in range(n):
     tmp = []
     line = f.readline()
     for j in line.split():
-        tmp.append(j)
+        tmp.append(int(j))
     adjMatrix.append(tmp)
+f.close()
 
 for i, weight in enumerate(nodes.split()):
     weight = int(weight)/sum(adjMatrix[i])
-    nodeWeight.append((i, weight))
+    nodeWeight[i] = weight
 
-print(nodeWeight) 
+print(nodeWeight)
+answer = []
+
+while len(nodeWeight) > 0:
+    temp = sorted(nodeWeight.items(), key=lambda d: d[0], reverse = True) #Let large id to sorted last
+    temp = sorted(temp, key = lambda d: d[1])
+    ansTemp = temp.pop()
+    del nodeWeight[ansTemp[0]]
+    for i, connect in enumerate(adjMatrix[ansTemp[0]]):
+        if connect == 1 and nodeWeight.get(i) != None:
+            del nodeWeight[i]
+    answer.append(ansTemp[0]) 
     
 #print(adjMatrix)
+print("MWIS : ",end = '')
+print(sorted(answer))
 
-f.close()
