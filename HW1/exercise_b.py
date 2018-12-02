@@ -61,7 +61,6 @@ for i, b in enumerate(newMwis):
         answer.append(i)
         total += oriWeight[i]
 
-print("MWIS : ", end='')
-print(sorted(answer))
+print("MWIS : ", sorted(answer))
 print("Total weight: ",total)
 
