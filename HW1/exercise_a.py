@@ -37,7 +37,6 @@ while len(nodeWeight) > 0:
     answer.append(ansTemp[0]) 
     
 #print(adjMatrix)
-print("MWIS : ", end='')
-print(sorted(answer))
+print("MWIS : ", sorted(answer))
 print("Total weight: ",total)
 
