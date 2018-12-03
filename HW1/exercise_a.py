@@ -18,9 +18,7 @@ f.close()
 
 for i, weight in enumerate(nodes.split()):
     originWeight.append(int(weight))
-    weight = int(weight)/sum(adjMatrix[i])
-    nodeWeight[i] = weight
-
+    nodeWeight[i] = int(weight)/(sum(adjMatrix[i]) + 1)
 
 
 answer = []
@@ -30,10 +28,10 @@ while len(nodeWeight) > 0:
     temp = sorted(temp, key = lambda d: d[1])
     ansTemp = temp.pop()
     total += originWeight[ansTemp[0]]
-    del nodeWeight[ansTemp[0]]
+    del nodeWeight[ansTemp[0]]  #delete max in G
     for i, connect in enumerate(adjMatrix[ansTemp[0]]):
         if connect == 1 and nodeWeight.get(i) != None:
-            del nodeWeight[i]
+            del nodeWeight[i]  #delete neighbor in G
     answer.append(ansTemp[0]) 
     
 #print(adjMatrix)

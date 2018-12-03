@@ -18,7 +18,7 @@ for i in range(n):
 weight = []
 oriWeight = []  
 for i, w in enumerate(nodes.split()):
-    weight.append(int(w)/sum(neighbor[i]))
+    weight.append(int(w)/(sum(neighbor[i]) + 1))
     oriWeight.append(int(w))
 f.close()
 
@@ -29,23 +29,26 @@ for i in range(n):
 
 while True: # to do round
     oldMwis = newMwis.copy()
-    for i in range(n):        
-        for j, connect in enumerate(neighbor[i]):
+    for i in range(n):   #each process to do       
+        for j, connect in enumerate(neighbor[i]): #every process receive from neighbor
             if connect == 1:
                 if oldMwis[j] == 1:
                     if weight[j] > weight[i]:
                         newMwis[i] = 0
                         break
-                    elif weight[j] == weight[i] and j < i:
+                    elif weight[j] == weight[i] and j < i: #if equal weight, compare id
                         newMwis[i] = 0
                         break
                     else:
                         newMwis[i] = 1
                 else:
                     newMwis[i] = 1
+            else: #if there are not connect must be chose itself
+                newMwis[i] = 1
+    #end choose mwis
     finish = True
     for i in range(n):
-        if oldMwis[i] != newMwis[i]:
+        if oldMwis[i] != newMwis[i]: #compare old and new
             finish = False
             break
     if finish:
