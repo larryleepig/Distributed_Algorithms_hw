@@ -37,4 +37,3 @@ while len(nodeWeight) > 0:
 #print(adjMatrix)
 print("MWIS : ", sorted(answer))
 print("Total weight: ",total)
-
