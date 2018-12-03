@@ -26,12 +26,10 @@ newMwis = []
 for i in range(n):
     newMwis.append(0) #init everyone is not in Mwisn
 
-round = 0
+
 while True: # to do round
-    oldMwis = []
-    for i in range(n):
-        oldMwis.append(newMwis[i])
-    for i in range(n):
+    oldMwis = newMwis.copy()
+    for i in range(n):        
         for j, connect in enumerate(neighbor[i]):
             if connect == 1:
                 if oldMwis[j] == 1:
@@ -46,7 +44,6 @@ while True: # to do round
                 else:
                     newMwis[i] = 1
     finish = True
-    round += 1
     for i in range(n):
         if oldMwis[i] != newMwis[i]:
             finish = False
