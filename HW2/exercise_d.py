@@ -36,8 +36,8 @@ while True: # to do round
                     if weight[j] > weight[i]:
                         newMwis[i] = 0
                         break
-                    elif weight[j] == weight[i] and j < i: #if equal weight, compare id
-                        newMwis[i] = 0
+                    elif weight[j] == weight[j]:
+                        newMwis[i]
                         break
                     else:
                         newMwis[i] = 1
