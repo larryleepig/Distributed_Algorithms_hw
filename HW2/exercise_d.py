@@ -24,11 +24,13 @@ f.close()
 
 newMwis = []
 for i in range(n):
-    newMwis.append(random.randint(1, 300)%2) #init everyone is random in newMwis
+    newMwis.append(random.randint(1, 300)%2) #init everyone is random in newMwis 
 
 #print(newMwis)
+
 while True: # to do round
     oldMwis = newMwis.copy()
+    wrongAnswer = False
     for i in range(n):   #each process to do       
         for j, connect in enumerate(neighbor[i]): #every process receive from neighbor
             if connect == 1:
@@ -36,8 +38,10 @@ while True: # to do round
                     if weight[j] > weight[i]:
                         newMwis[i] = 0
                         break
-                    elif weight[j] == weight[j]:
-                        newMwis[i]
+                    elif weight[j] == weight[i]:
+                        newMwis[i] = (random.randint(1, 300) % 2
+                        if oldMwis[i] == 1:
+                            wrongAnswer = True
                         break
                     else:
                         newMwis[i] = 1
@@ -51,7 +55,7 @@ while True: # to do round
         if oldMwis[i] != newMwis[i]: #compare old and new
             finish = False
             break
-    if finish:
+    if finish and not wrongAnswer:
         break
 
 answer = []
