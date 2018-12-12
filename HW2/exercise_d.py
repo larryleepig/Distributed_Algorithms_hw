@@ -31,8 +31,11 @@ for number in range(1000):
     newMwis = []
     for i in range(n):
         newMwis.append(random.randint(1, 300)%2) #init everyone is random in newMwis
-
+    finish = False
+    wrongAnswer = True
     while True: # to do round
+        if finish and not wrongAnswer: #if wrongAnswer happen , not stopping loop 
+            break
         oldMwis = newMwis.copy()
         wrongAnswer = False
 
@@ -45,7 +48,7 @@ for number in range(1000):
                             break
                         elif weight[j] == weight[i]:
                             if oldMwis[i] == 1:
-                                wrongAnswer = True
+                                wrongAnswer = True #simulate broadcast wrongAnswer
                             newMwis[i] = random.randint(1, 300)%2
                             break
                         else:
@@ -61,8 +64,6 @@ for number in range(1000):
             if oldMwis[i] != newMwis[i]: #compare old and new
                 finish = False
                 break
-        if finish and not wrongAnswer:
-            break
 
     answer = []
     total = 0
