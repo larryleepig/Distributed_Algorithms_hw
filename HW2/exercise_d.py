@@ -49,7 +49,7 @@ for number in range(1000):
                         elif weight[j] == weight[i]:
                             if oldMwis[i] == 1:
                                 wrongAnswer = True #simulate broadcast wrongAnswer
-                            newMwis[i] = random.randint(1, 300)%2
+                            newMwis[i] = random.randint(1, 300)%2 #random decide in or out
                             break
                         else:
                             newMwis[i] = 1
