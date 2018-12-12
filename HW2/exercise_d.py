@@ -22,49 +22,68 @@ for i, w in enumerate(nodes.split()):
     oriWeight.append(int(w))
 f.close()
 
-newMwis = []
-for i in range(n):
-    newMwis.append(random.randint(1, 300)%2) #init everyone is random in newMwis 
+answerSet = []
+answerNum = []
+answerWeight = []
 
-#print(newMwis)
 
-while True: # to do round
-    oldMwis = newMwis.copy()
-    wrongAnswer = False
-    for i in range(n):   #each process to do       
-        for j, connect in enumerate(neighbor[i]): #every process receive from neighbor
-            if connect == 1:
-                if oldMwis[j] == 1:
-                    if weight[j] > weight[i]:
-                        newMwis[i] = 0
-                        break
-                    elif weight[j] == weight[i]:
-                        newMwis[i] = (random.randint(1, 300) % 2
-                        if oldMwis[i] == 1:
-                            wrongAnswer = True
-                        break
+for number in range(1000):
+    newMwis = []
+    for i in range(n):
+        newMwis.append(random.randint(1, 300)%2) #init everyone is random in newMwis
+
+    while True: # to do round
+        oldMwis = newMwis.copy()
+        wrongAnswer = False
+
+        for i in range(n):   #each process to do       
+            for j, connect in enumerate(neighbor[i]): #every process receive from neighbor
+                if connect == 1:
+                    if oldMwis[j] == 1:
+                        if weight[j] > weight[i]:
+                            newMwis[i] = 0
+                            break
+                        elif weight[j] == weight[i]:
+                            if oldMwis[i] == 1:
+                                wrongAnswer = True
+                            newMwis[i] = random.randint(1, 300)%2
+                            break
+                        else:
+                            newMwis[i] = 1
+                    
                     else:
                         newMwis[i] = 1
-                else:
+                else: #if there are not connect must be chose itself
                     newMwis[i] = 1
-            else: #if there are not connect must be chose itself
-                newMwis[i] = 1
-    #end choose mwis
-    finish = True
-    for i in range(n):
-        if oldMwis[i] != newMwis[i]: #compare old and new
-            finish = False
+        #end choose mwis
+        finish = True
+        for i in range(n):
+            if oldMwis[i] != newMwis[i]: #compare old and new
+                finish = False
+                break
+        if finish and not wrongAnswer:
             break
-    if finish and not wrongAnswer:
-        break
 
-answer = []
-total = 0
-for i, b in enumerate(newMwis):
-    if b == 1:
-        answer.append(i)
-        total += oriWeight[i]
+    answer = []
+    total = 0
+    for i, b in enumerate(newMwis):
+        if b == 1:
+            answer.append(i)
+            total += oriWeight[i]
+    '''
+    print("MWIS : ", sorted(answer))
+    print("Total weight: ",total)
+    '''
 
-print("MWIS : ", sorted(answer))
-print("Total weight: ",total)
+    if sorted(answer) not in answerSet:
+        answerSet.append(sorted(answer))
+        answerNum.append(1)
+        answerWeight.append(total)
+    else:
+        index = answerSet.index(sorted(answer))
+        answerNum[index] += 1
 
+
+for i, ansSet in enumerate(answerSet):
+    print("set: ", ansSet," total weight:",answerWeight[i]," percentage:",(answerNum[i]/1000)*100,"%")
+print("\n")
